@@ -1,0 +1,12 @@
+package project.ood.healthcalculator.dao;
+
+import org.springframework.data.repository.CrudRepository;
+import project.ood.healthcalculator.entity.User;
+import project.ood.healthcalculator.entity.UserFoods;
+
+import java.util.List;
+
+public interface UserFoodsDAO extends CrudRepository<UserFoods, Long> {
+    List<UserFoods> findByUser(User user);
+    UserFoods findById(long id);
+}
