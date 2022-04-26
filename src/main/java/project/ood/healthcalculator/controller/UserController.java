@@ -1,35 +1,42 @@
 package project.ood.healthcalculator.controller;
 
-import com.alibaba.fastjson.JSON;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import project.ood.healthcalculator.dao.UserDAO;
 import project.ood.healthcalculator.entity.User;
+import project.ood.healthcalculator.service.factory.UserCRUDCreatorServiceImpl;
+import springfox.documentation.annotations.ApiIgnore;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.stream.Stream;
 
 @RestController
+@RequestMapping("/user")
+@Api(value = "User Operations APIs")
 public class UserController {
-    @Autowired
-    UserDAO userDAO;
+    private final UserCRUDCreatorServiceImpl userService;
 
-    @PostMapping("/user/login")
-    public User login(HttpServletRequest request) {
+    public UserController(UserCRUDCreatorServiceImpl userService) {
+        this.userService = userService;
+        userService.createCRUDService();
+    }
+
+    @PostMapping("/login")
+    @ApiOperation(value = "User login API", notes = "Now only support test user")
+    public User login(@ApiIgnore HttpServletRequest request) {
         User user = new User();
         user.setUserName("test");
         user.setPassword("123");
         try {
-            userDAO.save(user);
+            userService.create(user);
         } catch (Exception e) {
 
         }
 
         HttpSession session = request.getSession();
-        user = userDAO.findByUserName("test");
+        user = userService.retrieve(user.getUserName());
         session.setAttribute("userId", user.getUid());
 
         return user;

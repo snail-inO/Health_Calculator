@@ -16,6 +16,8 @@ public class User {
     private int foodCounts;
     @OneToMany(mappedBy = "user", cascade = {CascadeType.REMOVE})
     private List<UserFoods> userFoods;
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.REMOVE})
+    private List<UserMeal> userMeals;
 
     public User(long uid, String userName, String password, int userType, int foodCounts) {
         this.uid = uid;

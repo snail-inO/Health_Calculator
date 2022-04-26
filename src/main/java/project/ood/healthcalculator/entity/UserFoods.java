@@ -1,6 +1,7 @@
 package project.ood.healthcalculator.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class UserFoods {
@@ -14,6 +15,8 @@ public class UserFoods {
     @ManyToOne
     @JoinColumn(name = "fdc_id", foreignKey = @ForeignKey(name = "fk_fdc_id_food"))
     private Food food;
+    @ManyToMany(mappedBy = "userFoods")
+    private List<UserMeal> userMeals;
 
     public UserFoods(float value, User user, Food food) {
         this.value = value;
@@ -31,7 +34,7 @@ public class UserFoods {
         this.id = id;
     }
 
-    public double getValue() {
+    public float getValue() {
         return value;
     }
 
@@ -46,5 +49,9 @@ public class UserFoods {
     public void setFoodUser(Food food, User user) {
         this.food = food;
         this.user = user;
+    }
+
+    public void setUserMeals(List<UserMeal> userMeals) {
+        this.userMeals = userMeals;
     }
 }

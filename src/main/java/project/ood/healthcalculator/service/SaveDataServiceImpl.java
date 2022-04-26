@@ -9,12 +9,15 @@ import project.ood.healthcalculator.entity.FoodNutrients;
 import project.ood.healthcalculator.entity.Nutrient;
 
 import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 
 public class SaveDataServiceImpl implements SaveDataService{
     private FoodDAO foodDAO;
     private NutrientDAO nutrientDAO;
     private FoodNutrientsDAO foodNutrientsDAO;
+    static Lock lock= new ReentrantLock();
 
     public SaveDataServiceImpl(FoodDAO foodDAO, NutrientDAO nutrientDAO, FoodNutrientsDAO foodNutrientsDAO) {
         this.foodDAO = foodDAO;
@@ -27,9 +30,11 @@ public class SaveDataServiceImpl implements SaveDataService{
         Thread thread = new Thread(() -> {
             List<FoodNutrients> foodNutrients = food.getFoodNutrients();
             List<Nutrient> nutrients = foodNutrients.stream().map(FoodNutrients::getNutrient).collect(Collectors.toList());
-
-            foodDAO.save(new Food(food));
+            food.setFoodNutrients(null);
+            foodDAO.save(food);
+            lock.lock();
             nutrientDAO.saveAll(nutrients);
+            lock.unlock();
             foodNutrientsDAO.saveAll(foodNutrients);
         });
 

@@ -26,10 +26,6 @@ public class Nutrient {
     }
 
 
-    public void setFoodNutrients(List<FoodNutrients> foodNutrients) {
-        this.foodNutrients = foodNutrients;
-    }
-
     public long getNutrientId() {
         return nutrientId;
     }

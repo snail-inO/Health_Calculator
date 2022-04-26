@@ -44,20 +44,6 @@ public class Food {
 
     }
 
-    public Food(Food food) {
-        this.fdcId = food.getFdcId();
-        this.description = food.getDescription();
-        this.lowercaseDescription = food.getLowercaseDescription();
-        this.gtinUpc = food.getGtinUpc();
-        this.servingSize = food.getServingSize();
-        this.servingSizeUnit = food.getServingSizeUnit();
-        this.packageWeight = food.getPackageWeight();
-        this.ingredients = food.getIngredients();
-        this.dataType = food.getDataType();
-        this.brandName = food.getBrandName();
-        this.brandOwner = food.getBrandOwner();
-    }
-
     public long getFdcId() {
         return fdcId;
     }
