@@ -1,5 +1,7 @@
 package project.ood.healthcalculator.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,6 +9,7 @@ public class FoodNutrients {
     @Id
     private long foodNutrientId;
     private float value;
+    @JSONField(serialize = false)
     @ManyToOne
     @JoinColumn(name = "fdc_id", foreignKey = @ForeignKey(name = "fk_fdc_id_food"))
     private Food food;
@@ -14,7 +17,49 @@ public class FoodNutrients {
     @JoinColumn(name = "nutrient_id", foreignKey = @ForeignKey(name = "fk_nutrient_id_nutrient"))
     private Nutrient nutrient;
 
-    public FoodNutrients() {}
+    public static final class Builder {
+        private long foodNutrientId;
+        private float value;
+        private Food food;
+        private Nutrient nutrient;
+
+        private Builder() {}
+
+        public Builder withFoodNutrientId(long foodNutrientId) {
+            this.foodNutrientId = foodNutrientId;
+            return this;
+        }
+
+        public Builder withValue(float value) {
+            this.value = value;
+            return this;
+        }
+
+        public Builder withFood(Food food) {
+            this.food = food;
+            return this;
+        }
+
+        public Builder withNutrient(Nutrient nutrient) {
+            this.nutrient = nutrient;
+            return this;
+        }
+
+        public FoodNutrients build() {
+            return new FoodNutrients(this);
+        }
+    }
+
+    private FoodNutrients(Builder builder) {
+        this.foodNutrientId = builder.foodNutrientId;
+        this.value = builder.value;
+        this.food = builder.food;
+        this.nutrient = builder.nutrient;
+    }
+
+    public static Builder newBuilder() {
+        return new Builder();
+    }
 
     public FoodNutrients(long foodNutrientId, float value, Food food, Nutrient nutrient) {
         this.foodNutrientId = foodNutrientId;
@@ -23,6 +68,8 @@ public class FoodNutrients {
         this.nutrient = nutrient;
     }
 
+    public FoodNutrients() {
+    }
 
     public long getFoodNutrientId() {
         return foodNutrientId;
@@ -40,6 +87,14 @@ public class FoodNutrients {
         this.value = value;
     }
 
+    public Food getFood() {
+        return food;
+    }
+
+    public void setFood(Food food) {
+        this.food = food;
+    }
+
     public Nutrient getNutrient() {
         return nutrient;
     }
@@ -48,8 +103,4 @@ public class FoodNutrients {
         this.nutrient = nutrient;
     }
 
-    public void setFoodNutrient(Food food, Nutrient nutrient) {
-        this.food = food;
-        this.nutrient = nutrient;
-    }
 }

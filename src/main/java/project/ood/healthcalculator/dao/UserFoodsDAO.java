@@ -10,5 +10,4 @@ import java.util.List;
 
 public interface UserFoodsDAO extends CrudRepository<UserFoods, Long> {
     List<UserFoods> findByUser(User user);
-    UserFoods findById(long id);
 }

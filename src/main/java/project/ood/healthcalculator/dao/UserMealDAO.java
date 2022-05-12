@@ -10,5 +10,5 @@ import java.util.List;
 
 public interface UserMealDAO extends CrudRepository<UserMeal, Long> {
     List<UserMeal> findByUser(User user);
-    UserMeal findById(long id);
+    List<UserMeal> findByShared(boolean shared);
 }

@@ -2,6 +2,7 @@ package project.ood.healthcalculator.service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import project.ood.healthcalculator.dao.FoodDAO;
 import project.ood.healthcalculator.entity.Food;
@@ -13,6 +14,8 @@ import project.ood.healthcalculator.utils.CustomException;
 
 import java.util.ArrayList;
 import java.util.List;
+
+@Service
 public class FoodSearchServiceImpl implements FoodSearchService {
     private final String URL = "https://api.nal.usda.gov/fdc/v1/foods/";
     private final String KEY = "?api_key=S2MfBCexHuiPBbX197rJlMzadX0zCulIX37ymxd9";
@@ -32,7 +35,7 @@ public class FoodSearchServiceImpl implements FoodSearchService {
     }
 
     public Food byId(long id) {
-        return foodDAO.findByFdcId(id);
+        return foodDAO.findById(id).get();
     }
 
      public List<Food> byName(String name, int pageNum) {
@@ -61,7 +64,8 @@ public class FoodSearchServiceImpl implements FoodSearchService {
                 Nutrient nutrient = nutrientJSON.toJavaObject(Nutrient.class);
                 nutrientList.add(nutrient);
                 FoodNutrients foodNutrients = nutrientJSON.toJavaObject(FoodNutrients.class);
-                foodNutrients.setFoodNutrient(food, nutrient);
+                foodNutrients.setFood(food);
+                foodNutrients.setNutrient(nutrient);
                 foodNutrientsList.add(foodNutrients);
             }
             food.setFoodNutrients(foodNutrientsList);

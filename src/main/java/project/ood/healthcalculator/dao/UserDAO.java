@@ -7,5 +7,4 @@ import project.ood.healthcalculator.entity.User;
 
 public interface UserDAO extends CrudRepository<User, Long> {
     User findByUserName(String uname);
-    User findByUid(long uid);
 }

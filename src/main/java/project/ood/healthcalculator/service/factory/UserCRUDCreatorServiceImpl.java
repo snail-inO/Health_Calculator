@@ -2,8 +2,7 @@ package project.ood.healthcalculator.service.factory;
 
 import org.springframework.stereotype.Service;
 import project.ood.healthcalculator.entity.User;
-import project.ood.healthcalculator.service.UserServiceImpl;
-import project.ood.healthcalculator.service.factory.CRUDCreatorService;
+import project.ood.healthcalculator.service.CRUD.UserServiceImpl;
 
 @Service
 public class UserCRUDCreatorServiceImpl extends CRUDCreatorService<User, UserServiceImpl> {
@@ -12,12 +11,7 @@ public class UserCRUDCreatorServiceImpl extends CRUDCreatorService<User, UserSer
         super(userService);
     }
 
-
     public User retrieve(String name) {
         return super.getCRUDService().retrieve(name);
-    }
-
-    @Override
-    public void createCRUDService() {
     }
 }

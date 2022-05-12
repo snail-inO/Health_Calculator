@@ -1,19 +1,22 @@
 package project.ood.healthcalculator.service.factory;
 
-public abstract class CRUDCreatorService<T1, T2 extends CRUDService<T1>> implements CRUDService<T1>{
-    private T2 CRUDService;
+import project.ood.healthcalculator.service.CRUD.CRUDService;
 
-    public CRUDCreatorService() {
-    }
+public class CRUDCreatorService<T1, T2 extends CRUDService<T1>> implements CRUDService<T1>{
+    private T2 CRUDService;
 
     public CRUDCreatorService(T2 CRUDService) {
         this.CRUDService = CRUDService;
     }
-    protected abstract void createCRUDService();
 
     @Override
     public T1 create(T1 t1) {
         return CRUDService.create(t1);
+    }
+
+    @Override
+    public <S extends T1> Iterable<S> createAll(Iterable<S> entities) {
+        return CRUDService.createAll(entities);
     }
 
     @Override
@@ -35,7 +38,4 @@ public abstract class CRUDCreatorService<T1, T2 extends CRUDService<T1>> impleme
         return CRUDService;
     }
 
-    public void setCRUDService(T2 CRUDService) {
-        this.CRUDService = CRUDService;
-    }
 }

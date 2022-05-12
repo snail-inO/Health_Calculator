@@ -1,5 +1,7 @@
 package project.ood.healthcalculator.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -20,12 +22,36 @@ public class Food {
     private String brandOwner;
     @OneToMany(mappedBy = "food", cascade = {CascadeType.REMOVE})
     private List<FoodNutrients> foodNutrients;
+    @JSONField(serialize = false)
     @OneToMany(mappedBy = "food", cascade = {CascadeType.REMOVE})
     private List<UserFoods> userFoods;
 
+    public static final class Builder {
+        private long fdcId;
+
+        private Builder() {}
+
+        public Builder withFdcId(long fdcId) {
+            this.fdcId = fdcId;
+            return this;
+        }
+
+        public Food build() {
+            return new Food(this);
+        }
+    }
+
+    private Food(Builder builder) {
+        this.fdcId = builder.fdcId;
+    }
+
+    public static Builder newBuilder() {
+        return new Builder();
+    }
+
     public Food(long fdcId, String description, String lowercaseDescription, String gtinUpc, float servingSize,
                 String servingSizeUnit, String packageWeight, String ingredients, String dataType, String brandName,
-                String brandOwner, List<FoodNutrients> foodNutrients) {
+                String brandOwner, List<FoodNutrients> foodNutrients, List<UserFoods> userFoods) {
         this.fdcId = fdcId;
         this.description = description;
         this.lowercaseDescription = lowercaseDescription;
@@ -38,6 +64,7 @@ public class Food {
         this.brandName = brandName;
         this.brandOwner = brandOwner;
         this.foodNutrients = foodNutrients;
+        this.userFoods = userFoods;
     }
 
     public Food() {
@@ -138,5 +165,13 @@ public class Food {
 
     public void setFoodNutrients(List<FoodNutrients> foodNutrients) {
         this.foodNutrients = foodNutrients;
+    }
+
+    public List<UserFoods> getUserFoods() {
+        return userFoods;
+    }
+
+    public void setUserFoods(List<UserFoods> userFoods) {
+        this.userFoods = userFoods;
     }
 }

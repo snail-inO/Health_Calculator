@@ -1,4 +1,4 @@
-package project.ood.healthcalculator.service.factory;
+package project.ood.healthcalculator.service.CRUD;
 
 import org.springframework.data.repository.CrudRepository;
 
@@ -29,7 +29,12 @@ public class CRUDServiceImpl<T1, T2 extends CrudRepository<T1, Long>> implements
         baseDAO.deleteById(id);
     }
 
-    public T2 getBaseDAO() {
+    @Override
+    public <S extends T1> Iterable<S> createAll(Iterable<S> entities) {
+        return baseDAO.saveAll(entities);
+    }
+
+    protected T2 getBaseDAO() {
         return baseDAO;
     }
 }
