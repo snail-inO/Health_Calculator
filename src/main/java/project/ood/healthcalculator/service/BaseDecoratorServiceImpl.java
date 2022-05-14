@@ -3,7 +3,7 @@ package project.ood.healthcalculator.service;
 import project.ood.healthcalculator.service.CRUD.CRUDService;
 
 public class BaseDecoratorServiceImpl implements CRUDService {
-    private CRUDService wrappee;
+    private final CRUDService wrappee;
 
     public BaseDecoratorServiceImpl(CRUDService wrappee) {
         this.wrappee = wrappee;

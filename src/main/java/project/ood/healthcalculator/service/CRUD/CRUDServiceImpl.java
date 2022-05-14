@@ -3,7 +3,7 @@ package project.ood.healthcalculator.service.CRUD;
 import org.springframework.data.repository.CrudRepository;
 
 public class CRUDServiceImpl<T1, T2 extends CrudRepository<T1, Long>> implements CRUDService<T1>{
-    private T2 baseDAO;
+    private final T2 baseDAO;
 
     public CRUDServiceImpl(T2 baseDAO) {
         this.baseDAO = baseDAO;

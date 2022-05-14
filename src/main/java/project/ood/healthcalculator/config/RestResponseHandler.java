@@ -13,7 +13,7 @@ import project.ood.healthcalculator.utils.RestJSON;
 public class RestResponseHandler implements ResponseBodyAdvice<Object> {
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
-        return !returnType.equals(RestJSON.class);
+        return !returnType.getDeclaringClass().equals(RestJSON.class);
     }
 
     @Override

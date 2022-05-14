@@ -52,6 +52,19 @@ public class User implements EntityInterface{
             return this;
         }
 
+        public Builder withUser(User user) {
+            this.uid = user.getUid();
+            this.userName = user.getUserName();
+            this.password = user.getPassword();
+            this.userType = user.getUserType();
+            this.foodCount = user.getFoodCount();
+            this.mealCount = user.getMealCount();
+            this.recipeCount = user.getRecipeCount();
+            this.age = user.getAge();
+
+            return this;
+        }
+
         public Builder withUid(long uid) {
             this.uid = uid;
             return this;

@@ -8,10 +8,10 @@ import project.ood.healthcalculator.entity.Food;
 import project.ood.healthcalculator.entity.User;
 import project.ood.healthcalculator.entity.UserFoods;
 import project.ood.healthcalculator.enums.SpecialIdEnum;
-import project.ood.healthcalculator.service.CRUD.UserFoodServiceImpl;
-import project.ood.healthcalculator.service.UserRepositoryDecoratorServiceImpl;
-import project.ood.healthcalculator.service.CRUD.UserServiceImpl;
 import project.ood.healthcalculator.service.CRUD.CRUDService;
+import project.ood.healthcalculator.service.CRUD.UserFoodServiceImpl;
+import project.ood.healthcalculator.service.CRUD.UserServiceImpl;
+import project.ood.healthcalculator.service.UserRepositoryDecoratorServiceImpl;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpSession;
@@ -58,5 +58,4 @@ public class UserFoodController {
         return userFoodService.update(UserFoods.newBuilder().withUserFoods(userFoodService.retrieve(id)).withValue(value)
                 .build());
     }
-
 }

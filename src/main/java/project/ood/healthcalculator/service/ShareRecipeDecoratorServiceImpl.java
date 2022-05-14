@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShareRecipeDecoratorServiceImpl extends BaseDecoratorServiceImpl {
-    private CRUDService<UserRecipe> userRecipeService;
+    private final CRUDService<UserRecipe> userRecipeService;
 
     public ShareRecipeDecoratorServiceImpl(CRUDService wrappee, CRUDService<UserRecipe> userRecipeService) {
         super(wrappee);

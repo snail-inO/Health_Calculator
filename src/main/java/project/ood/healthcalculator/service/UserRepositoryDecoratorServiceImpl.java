@@ -7,7 +7,7 @@ import project.ood.healthcalculator.service.CRUD.CRUDService;
 import java.util.Collection;
 
 public class UserRepositoryDecoratorServiceImpl<T extends EntityInterface> extends BaseDecoratorServiceImpl {
-    private CRUDService<T> repositoryService;
+    private final CRUDService<T> repositoryService;
 
     public UserRepositoryDecoratorServiceImpl(CRUDService<User> wrappee, CRUDService<T> repositoryService) {
         super(wrappee);

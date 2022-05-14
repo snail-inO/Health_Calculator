@@ -11,10 +11,10 @@ public class FoodNutrients {
     private float value;
     @JSONField(serialize = false)
     @ManyToOne
-    @JoinColumn(name = "fdc_id", foreignKey = @ForeignKey(name = "fk_fdc_id_food"))
+    @JoinColumn(name = "fdc_id")
     private Food food;
     @ManyToOne
-    @JoinColumn(name = "nutrient_id", foreignKey = @ForeignKey(name = "fk_nutrient_id_nutrient"))
+    @JoinColumn(name = "nutrient_id")
     private Nutrient nutrient;
 
     public static final class Builder {

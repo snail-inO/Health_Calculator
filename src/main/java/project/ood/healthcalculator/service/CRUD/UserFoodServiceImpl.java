@@ -1,6 +1,5 @@
 package project.ood.healthcalculator.service.CRUD;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import project.ood.healthcalculator.dao.UserFoodsDAO;
 import project.ood.healthcalculator.entity.User;

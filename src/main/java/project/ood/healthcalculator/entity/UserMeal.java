@@ -27,7 +27,7 @@ public class UserMeal implements EntityInterface {
     private List<UserFoods> userFoods;
     @JSONField(serialize = false)
     @ManyToOne
-    @JoinColumn(name = "uid", foreignKey = @ForeignKey(name = "fk_uid_user"))
+    @JoinColumn(name = "uid")
     private User user;
     @JSONField(serialize = false)
     @ManyToMany(mappedBy = "userMeals", cascade = CascadeType.REMOVE)

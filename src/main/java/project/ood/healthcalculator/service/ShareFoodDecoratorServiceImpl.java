@@ -1,12 +1,8 @@
 package project.ood.healthcalculator.service;
 
-import project.ood.healthcalculator.entity.User;
 import project.ood.healthcalculator.entity.UserFoods;
 import project.ood.healthcalculator.enums.SpecialIdEnum;
 import project.ood.healthcalculator.service.CRUD.CRUDService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ShareFoodDecoratorServiceImpl extends BaseDecoratorServiceImpl {
     public ShareFoodDecoratorServiceImpl(CRUDService<UserFoods> wrappee) {

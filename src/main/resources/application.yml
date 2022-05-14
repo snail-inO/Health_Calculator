@@ -2,8 +2,8 @@ spring:
   datasource:
     username: root
     password: 123456
-    url: jdbc:mysql://mysql_db:3306/health_calculator
+    url: jdbc:mysql://localhost:3306/health_calculator
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create

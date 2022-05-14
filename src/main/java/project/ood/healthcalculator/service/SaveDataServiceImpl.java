@@ -1,6 +1,6 @@
 package project.ood.healthcalculator.service;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Service;
 import project.ood.healthcalculator.dao.FoodDAO;
 import project.ood.healthcalculator.dao.FoodNutrientsDAO;
 import project.ood.healthcalculator.dao.NutrientDAO;
@@ -13,10 +13,11 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 
+@Service
 public class SaveDataServiceImpl implements SaveDataService{
-    private FoodDAO foodDAO;
-    private NutrientDAO nutrientDAO;
-    private FoodNutrientsDAO foodNutrientsDAO;
+    private final FoodDAO foodDAO;
+    private final NutrientDAO nutrientDAO;
+    private final FoodNutrientsDAO foodNutrientsDAO;
     static Lock lock= new ReentrantLock();
 
     public SaveDataServiceImpl(FoodDAO foodDAO, NutrientDAO nutrientDAO, FoodNutrientsDAO foodNutrientsDAO) {

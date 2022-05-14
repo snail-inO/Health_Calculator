@@ -2,19 +2,19 @@ package project.ood.healthcalculator.service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import project.ood.healthcalculator.dao.FoodDAO;
 import project.ood.healthcalculator.entity.Food;
-import project.ood.healthcalculator.entity.FoodNutrients;
 import project.ood.healthcalculator.entity.Nutrient;
 import project.ood.healthcalculator.enums.FoodQueryEnum;
 import project.ood.healthcalculator.enums.RestEnum;
 import project.ood.healthcalculator.utils.CustomException;
 
-import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 public class FoodSearchServiceImpl implements FoodSearchService {
     private final String URL = "https://api.nal.usda.gov/fdc/v1/foods/";
@@ -28,7 +28,7 @@ public class FoodSearchServiceImpl implements FoodSearchService {
     private final String ORDER = "&sortOrder=asc";
     private final String TOTAL_PAGES = "totalPages";
 
-    private FoodDAO foodDAO;
+    private final FoodDAO foodDAO;
 
     public FoodSearchServiceImpl(FoodDAO foodDAO) {
         this.foodDAO = foodDAO;
@@ -46,33 +46,20 @@ public class FoodSearchServiceImpl implements FoodSearchService {
         int maxPage = res.getIntValue(TOTAL_PAGES);
         if (pageNum > maxPage)
             throw new CustomException(RestEnum.BAD_REQUEST);
-        if (res == null)
-            throw new CustomException(RestEnum.NOT_FOUND);
+
         JSONArray foods = res.getJSONArray(FoodQueryEnum.FOODS.getJSONKeyName());
-        if (foods == null)
-            throw new CustomException(RestEnum.NOT_FOUND);
-        List<Food> foodRes = new ArrayList<>();
+        List<Food> foodRes = foods.toJavaList(Food.class);
+
         for (int i = 0; i < foods.size(); i++) {
             JSONObject foodsJSONObject = foods.getJSONObject(i);
-            Food food = foodsJSONObject.toJavaObject(Food.class);
-
+            Food food = foodRes.get(i);
             JSONArray nutrients = foodsJSONObject.getJSONArray(FoodQueryEnum.NUTRIENTS.getJSONKeyName());
-            List<Nutrient> nutrientList = new ArrayList<>();
-            List<FoodNutrients> foodNutrientsList = new ArrayList<>();
-            for (int j = 0; j < nutrients.size(); j++) {
-                JSONObject nutrientJSON = nutrients.getJSONObject(j);
-                Nutrient nutrient = nutrientJSON.toJavaObject(Nutrient.class);
-                nutrientList.add(nutrient);
-                FoodNutrients foodNutrients = nutrientJSON.toJavaObject(FoodNutrients.class);
-                foodNutrients.setFood(food);
-                foodNutrients.setNutrient(nutrient);
-                foodNutrientsList.add(foodNutrients);
+            List<Nutrient> nutrientList = nutrients.toJavaList(Nutrient.class);
+            for(int j = 0; j < food.getFoodNutrients().size(); j++) {
+                food.getFoodNutrients().get(j).setNutrient(nutrientList.get(j));
             }
-            food.setFoodNutrients(foodNutrientsList);
-            foodRes.add(food);
         }
 
         return foodRes;
     }
-
 }

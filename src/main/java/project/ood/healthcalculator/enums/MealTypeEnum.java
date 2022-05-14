@@ -8,7 +8,7 @@ public enum MealTypeEnum {
     OTHER(4),
     UNDEFINE(-1);
 
-    private int num;
+    private final int num;
 
     MealTypeEnum(int num) {
         this.num = num;

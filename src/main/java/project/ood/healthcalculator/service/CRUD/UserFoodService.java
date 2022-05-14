@@ -1,6 +1,5 @@
 package project.ood.healthcalculator.service.CRUD;
 
-import project.ood.healthcalculator.entity.Food;
 import project.ood.healthcalculator.entity.User;
 import project.ood.healthcalculator.entity.UserFoods;
 

@@ -9,7 +9,6 @@ import project.ood.healthcalculator.enums.*;
 import project.ood.healthcalculator.service.CRUD.*;
 import project.ood.healthcalculator.service.NutrientCalculationService;
 import project.ood.healthcalculator.service.NutrientCalculationServiceImpl;
-import project.ood.healthcalculator.service.factory.*;
 import project.ood.healthcalculator.utils.CustomException;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -39,7 +38,8 @@ public class NutrientCounterController {
 
     @PostMapping
     @ApiOperation(value = "Calculate and save user's recipe/meal/food's nutrition summary")
-    public Iterable<NutrientCounter> calculateRecipeNutrient(@RequestParam int typeId, @RequestParam long id, @ApiIgnore HttpSession session) {
+    public Iterable<NutrientCounter> calculateRecipeNutrient(@RequestParam int typeId, @RequestParam long id,
+                                                             @ApiIgnore HttpSession session) {
         long uid = (long) session.getAttribute("userId");
         List<NutrientCounter> nutrientCounters;
         NutrientCalculationService nutrientCalculationService = new NutrientCalculationServiceImpl();

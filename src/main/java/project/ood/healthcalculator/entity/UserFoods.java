@@ -15,10 +15,10 @@ public class UserFoods implements EntityInterface {
     private float value;
     @JSONField(serialize = false)
     @ManyToOne
-    @JoinColumn(name = "uid", foreignKey = @ForeignKey(name = "fk_uid_user"))
+    @JoinColumn(name = "uid")
     private User user;
     @ManyToOne
-    @JoinColumn(name = "fdc_id", foreignKey = @ForeignKey(name = "fk_fdc_id_food"))
+    @JoinColumn(name = "fdc_id")
     private Food food;
     @JSONField(serialize = false)
     @ManyToMany(mappedBy = "userFoods", cascade = CascadeType.REMOVE)

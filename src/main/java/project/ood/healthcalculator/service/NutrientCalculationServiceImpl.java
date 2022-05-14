@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import project.ood.healthcalculator.entity.*;
 import project.ood.healthcalculator.enums.SpecialIdEnum;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,8 +71,6 @@ public class NutrientCalculationServiceImpl implements NutrientCalculationServic
                         .withUser(user)
                         .withUserRecipe(userRecipe).withUserMeal(userMeal).withUserFoods(userFoods)
                         .withNutrient(Nutrient.newBuilder().withNutrientId(nutrientId).build()).build());
-            log.info("user id: {}, reciped id: {}, meal id: {}, food id: {}, nutrient id: {}", user.getUid(),
-                    userRecipe.getUserRecipeId(), userMeal.getUserMealId(), userFoods.getUserFoodsId(), nutrientId);
         });
 
         return nutritionAccumulator;

@@ -37,8 +37,8 @@ public enum AverageTypeNutritionEnum implements NutritionDataInterface {
     SODIUM(1500, 1093),
     ZINC(11, 1095);
 
-    private float value;
-    private long nutrientId;
+    private final float value;
+    private final long nutrientId;
 
     AverageTypeNutritionEnum(float value, int nutrientId) {
         this.value = value;

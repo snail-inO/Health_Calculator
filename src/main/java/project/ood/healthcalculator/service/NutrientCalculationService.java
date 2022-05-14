@@ -2,7 +2,6 @@ package project.ood.healthcalculator.service;
 
 import project.ood.healthcalculator.entity.*;
 
-import java.util.List;
 import java.util.Map;
 
 public interface NutrientCalculationService {
