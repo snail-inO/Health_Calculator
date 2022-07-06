@@ -1,5 +1,5 @@
 # Health_Calculator
-[Use cases](./docs/use_cases.md)&emsp;&emsp;&emsp;[Models](./docs/models.md)
+[Use cases](./docs/use_cases.md)&emsp;&emsp;&emsp;[Models](./docs/models.md)&emsp;&emsp;&emsp;[Design Patterns](./docs/design_patterns.md)
 ## Introduction
 A Web App that orients different types of users to calculate their dietary intake and analyzes the healthiness of their
 diet, plus giving them advice that makes their diet more balanced and healthier.
